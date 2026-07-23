@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { Producto } from '../producto.model';
 import { ProductoService } from '../producto-service';
 import { CommonModule } from '@angular/common';
@@ -13,22 +13,20 @@ export class ProductoLista {
 
   private productoServicio = inject(ProductoService);
 
-  ngOnInit(){
+  ngOnInit() {
     // Cargar los productos
     this.obtenerProductos();
   }
 
-  private obtenerProductos(): void{
-    this.productoServicio.obtenerProductosLista().subscribe(
-      {
-        next: (datos) => {
-          console.log(datos);
-          this.productos = datos;
-        },
-        error: (error) => {
-          console.error("Error al obtener los productos", error);
-        }
-      }
-    );
+  private cd = inject(ChangeDetectorRef);
+
+  private obtenerProductos(): void {
+    this.productoServicio.obtenerProductosLista().subscribe({
+      next: (datos) => {
+        this.productos = datos;
+        this.cd.detectChanges();
+      },
+      error: (error) => console.error(error)
+    });
   }
 }
