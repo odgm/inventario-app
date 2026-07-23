@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable, Service } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Producto } from './producto.model';
 
@@ -11,7 +11,7 @@ export class ProductoService {
     private urlBase = "http://localhost:8080/inventario-app/productos";
     private clienteHttp = inject(HttpClient);
 
-    obtenerProductosLista(): Observable<Producto[]>{
+    obtenerProductosLista(): Observable<Producto[]> {
         return this.clienteHttp.get<Producto[]>(this.urlBase);
     }
 

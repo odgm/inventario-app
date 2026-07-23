@@ -1,15 +1,15 @@
 import { Component, inject } from '@angular/core';
 import { Producto } from '../producto.model';
 import { ProductoService } from '../producto-service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-producto-lista',
-  imports: [],
-  templateUrl: './producto-lista.html',
-  styleUrl: './producto-lista.css',
+  imports: [CommonModule],
+  templateUrl: './producto-lista.html'
 })
 export class ProductoLista {
-  productos!: Producto[];
+  productos: Producto[] = [];
 
   private productoServicio = inject(ProductoService);
 
@@ -22,6 +22,7 @@ export class ProductoLista {
     this.productoServicio.obtenerProductosLista().subscribe(
       {
         next: (datos) => {
+          console.log(datos);
           this.productos = datos;
         },
         error: (error) => {
