@@ -2,10 +2,11 @@ import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { Producto } from '../producto.model';
 import { ProductoService } from '../producto-service';
 import { ActivatedRoute } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-editar-producto',
-  imports: [],
+  imports: [FormsModule],
   templateUrl: './editar-producto.html'
 })
 export class EditarProducto {
@@ -26,4 +27,9 @@ export class EditarProducto {
       error: (errores: any) => console.log(errores)
     })
   }
+
+  onSubmit(){
+    //editar producto
+  }
+
 }
